@@ -1,4 +1,4 @@
-class MarvelServeice {
+class MarvelService {
     _apiBase = 'https://gateway.marvel.com:443/v1/public/'
     _apiKey = 'apikey=6cef691ddd12279084f44d15f15488d3'
 
@@ -23,14 +23,23 @@ class MarvelServeice {
     }
 
     _transformCharacter = (char) => {
+        if(char.description === '') {
+            char.description = 'No description this character'
+        }
+
+        if(char.description.length >= 100) {
+            char.description = char.description.slice(0, 100) + '...'
+        }
+
         return {
             name: char.name,
             description: char.description,
             thumbnail: char.thumbnail.path + '.' + char.thumbnail.extension,
             homepage: char.urls[0].url,
             wiki: char.urls[1].url,
+            id: char.id,
         }
     }
 }
 
-export default MarvelServeice
+export default MarvelService
