@@ -23,6 +23,12 @@ class RandomChar extends Component {
                     })
     }
 
+    onChatLoading = () => {
+        this.setState({
+            loading: true
+        })
+    }
+
     onError = () => {
         this.setState({
             loading: false,
@@ -38,12 +44,10 @@ class RandomChar extends Component {
         this.updateChart()
     }
 
-    componentWillUnmount() {
-
-    }
 
     updateChart = () => {
         const id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000);
+        this.onChatLoading();
         this.marvelService
             .getCharacter(id)
             .then(this.onChatLoaded)
@@ -83,7 +87,7 @@ const View = ({char}) => {
     const {name, description, thumbnail, homepage, wiki} = char;
     let imgStyle = {'objectFit' : 'cover'};
     if (char.thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {
-        imgStyle = {'objectFit' : 'container'};
+        imgStyle = {'objectFit' : 'contain'};
     }
             
 

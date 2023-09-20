@@ -38,6 +38,7 @@ class MarvelService {
             homepage: char.urls[0].url,
             wiki: char.urls[1].url,
             id: char.id,
+            comics: char.comics.items,
         }
     }
 }
